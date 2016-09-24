@@ -4,6 +4,8 @@
     Private Sub RadiusBar_Scroll(sender As Object, e As EventArgs) Handles RadiusBar.Scroll
         Dim FirstTime As Integer = My.Computer.Clock.TickCount
         Dim MyGaussianBlur As FastGaussianBlur = New FastGaussianBlur(OriginalBitmap)
+        '当模糊背景透明的图像时需要使用 FastGaussianBlurWithAlpha 类，否则应继续使用 FastGaussianBlur 类以节省时间和内存
+        'Dim MyGaussianBlurWithAlpha As FastGaussianBlurWithAlpha = New FastGaussianBlurWithAlpha(OriginalBitmap)
         BackgroundImage = MyGaussianBlur.GaussianBlur(RadiusBar.Value)
         Dim SecondTime As Integer = My.Computer.Clock.TickCount
         Me.Text = "快速高斯模糊 - 模糊半径：" & RadiusBar.Value & "，用时：" & (SecondTime - FirstTime) & " 毫秒"
